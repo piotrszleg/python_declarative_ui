@@ -1,16 +1,7 @@
-import functools
 import tkinter as tk
-from dataclasses import dataclass
-
-def button(fun):
-    fun.is_button=True
-    return fun
-
-@dataclass
-class slider(object):
-    tp:any
-    min:any
-    max:any
+import functools
+import ui
+from controls import button, slider
 
 class tkinter_provider(tk.Frame):
     def __init__(self, obj, fields, master=None):
@@ -145,47 +136,3 @@ class tkinter_provider(tk.Frame):
                 line.pack(side="top")
             else:
                 raise ValueError("Unknown field type")
-
-def ui(cls):   
-    @functools.wraps(cls)
-    def ui_wrapper(*args, **kwargs):
-        fields=cls.__annotations__.copy()
-        for name, value in cls.__dict__.items():
-            if callable(value) and "is_button" in value.__dict__:
-                fields[name]=button
-        obj=cls(*args, **kwargs)
-        provider=tkinter_provider(obj, fields)
-        obj.__dict__["close"]=provider.master.destroy
-        provider.open()
-        return obj
-    return ui_wrapper
-
-@ui
-class App(object):
-    name:str
-    size:int
-    scale:float
-    enabled:bool
-    
-    probability:slider(float, 0.0, 12.0)
-
-    @button
-    def print_dict(self):
-        print(self.__dict__)
-
-    @button
-    def disable(self):
-       self.enabled=False
-
-    @button
-    def clear_name(self):
-       self.name=""
-
-    def close(self):
-        pass # for linter
-
-    @button
-    def exit(self):
-        self.close()
-
-App()
