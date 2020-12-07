@@ -1,4 +1,3 @@
-import functools
 from ui import ui
 from controls import button, slider
 

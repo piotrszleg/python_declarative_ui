@@ -9,7 +9,6 @@ Created as an experiment with meta-programming in Python an inspired by Unity3D'
 # Example
 
 ```python
-import functools
 from ui import ui
 from controls import button, slider
 
