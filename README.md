@@ -6,9 +6,6 @@ Currently it uses tkinter as user interface implementation.
 
 Created as an experiment with meta-programming in Python an inspired by Unity3D's component inspector generation.
 
-# Running
-Pass `example.py` to your Python 3 interpreter.
-
 # Example
 
 ```python
@@ -46,3 +43,6 @@ class App(object):
 
 App()
 ```
+
+# Running
+Pass `example.py` to your Python 3 interpreter.
